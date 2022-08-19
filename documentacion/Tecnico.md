@@ -98,6 +98,32 @@ go version
 # go version go1.18.1 linux/amd64
 ```
 
+----------------------
+
+##### Fiber
+
+Create App
+```bash
+$ go mod init [nombre]
+--------------------
+-     Ejemplo      - 
+- go mod init S1P1 -
+--------------------
+```
+
+Install Dependencies
+```bash
+$ go get github.com/gofiber/fiber
+$ go get -u github.com/gofiber/fiber/v2
+$ go get -u github.com/gofiber/template
+```
+
+### Ejecutar Proyecto
+```bash
+$ go run main.go
+```
+
+
 
 ___________
 
