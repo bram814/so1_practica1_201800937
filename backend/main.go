@@ -7,13 +7,22 @@ import (
 	/* Fiber - Template */
 	"github.com/gofiber/template/html"
 
+
 	/* import */
 	"fmt"
+	"log"
 	/* Route */
 	"S1P1/src/config"
 )
 
+
+
+
 func main() {
+	/* Connect */
+	if err := config.Connect(); err != nil {
+		log.Fatal(err)
+	}
 
 	// Initialize standard Go html template engine
 	engine := html.New("./views", ".html")
@@ -29,10 +38,11 @@ func main() {
 		return c.Render("index", fiber.Map{})
 	})
 
-	// fmt.Println(config.ENV_PORT);
-	/*
-		Se ejecuta el servidor y en caso de fallar, muetra log.Fatal con el error.
-	*/
+	app.Get("/carro", config.GetCarr) // ver Carros
+	app.Post("/carro", config.PostCarr) // Ingresar Carro
+
+	// app.Put("/carro")
+	// app.Delete("/carro")
 
 	_ = app.Listen(fmt.Sprintf(":%d",config.ENV_PORT))
 }
