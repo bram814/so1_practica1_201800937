@@ -116,10 +116,12 @@ Install Dependencies
 $ go get github.com/gofiber/fiber
 $ go get -u github.com/gofiber/fiber/v2
 $ go get -u github.com/gofiber/template
+$ go get go.mongodb.org/mongo-driver/mongo
 ```
 
 ### Ejecutar Proyecto
 ```bash
+$ go build main.go
 $ go run main.go
 ```
 
