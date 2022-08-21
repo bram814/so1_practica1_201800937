@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../css/Registry.css';
+import { addCar } from '../../Api/Route.js';
 
 export default function Registry(props){
 
@@ -31,6 +32,13 @@ export default function Registry(props){
         event.preventDefault();
         
         console.log(`Placa: ${placa} -  Marca: ${marca} - Modelo: ${modelo} - Serie: ${serie} - Color: ${color}`)
+        try{    
+
+            var query = await addCar(placa, marca, parseInt(modelo), serie, color);  
+
+        } catch (e) {
+            alert(e);
+        }
     }
 
 
