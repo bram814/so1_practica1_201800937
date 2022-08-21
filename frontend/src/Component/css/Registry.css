@@ -1,0 +1,149 @@
+
+.div-login {
+
+    background: black;
+}
+.form-select{
+    margin: 0px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-family: 'Times New Roman';
+}
+
+.form-label {
+    margin: 0px;
+    padding: 10px;
+    width: 100%;
+    height: 10%;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-family: 'Times New Roman';
+}
+.form-login-2{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 400px;
+    background: #000000;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'Times New Roman';
+    color: white;
+    box-shadow: 7px 13px 37px rgb(25, 255, 22);
+}
+.form-login-2 h1  {
+
+    font-size: 22px;
+    margin: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+
+}
+
+.etiqueta {
+    width: 100%;
+    background: #f3f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #c0d0c3;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    /* //text-align: center; */
+}
+
+.form-login-2 .boton{
+
+    width: 100%;
+    background: #000000;
+    border: 1px solid #c0d0c3;
+    padding: 12px;
+    color: white;
+    margin-left: 16px 0;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+
+}
+
+
+
+
+.form-login-3{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 600px;
+    background: #000000;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'Times New Roman';
+    color: white;
+    box-shadow: 7px 13px 37px rgb(255, 0, 0);
+}
+.form-login-3 h1 {
+
+    font-size: 22px;
+    margin: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+
+}
+
+.etiqueta-3{
+    width: 100%;
+    background: #f3f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #c0d0c3;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    /* //text-align: center; */
+}
+
+.form-login-3 .boton{
+
+    width: 100%;
+    background: #000000;
+    border: 1px solid #c0d0c3;
+    padding: 12px;
+    color: white;
+    margin-left: 16px 0;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+
+}
+
+.form-table {
+    align-content: center;
+    align-items: center;
+    /* border: red 1px solid; */
+    /* border-color:white; */
+}
+
+
+.form-table {
+    align-content: center;
+    align-items: center;
+    /* border: red 1px solid; */
+    border-color:white;
+    border-collapse: collapse;
+}
+
+td + td,
+th + th { border-left: 1px solid white; }
+tr + tr { border-top: 1px solid white; }
+
+td,th { 
+    padding: 20px; 
+}
+
+tr + tr > td, tr + tr > th { 
+    border-top: 1px solid white; 
+}
