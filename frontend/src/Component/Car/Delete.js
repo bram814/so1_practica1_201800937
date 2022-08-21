@@ -1,6 +1,6 @@
-
 import React, {useState} from 'react';
 import '../css/Car/Delete.css';
+import { deleteCar } from '../../Api/Route.js';
 
 export default function Delete(props){
 
@@ -14,7 +14,19 @@ export default function Delete(props){
     async function handleCreateCarr(event){
         event.preventDefault();
         
-        console.log(`Placa: ${placa}`)
+        try{    
+            if(placa !== ""){
+            
+                var query = await deleteCar(placa);
+                alert("Eliminado")
+
+            } else {
+                alert("Ingrese Placa")
+            }
+
+        } catch (e) {
+            alert(e);
+        }
     }
 
 
