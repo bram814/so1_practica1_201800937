@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../css/Car/Update.css';
+import { updateCar } from '../../Api/Route';
 
 export default function Update(props){
 
@@ -30,7 +31,27 @@ export default function Update(props){
     async function handleCreateCarr(event){
         event.preventDefault();
         
-        console.log(`Placa: ${placa} -  Marca: ${marca} - Modelo: ${modelo} - Serie: ${serie} - Color: ${color}`)
+        try{    
+
+            if(placa === ""){
+                alert("Debe de ingresar una placa")
+            } else{
+                var newModelo;
+                if(modelo === ''){
+                    newModelo = -1;
+                }else {
+                    newModelo = parseInt(modelo);
+                }
+                console.log(`Placa: ${placa} -  Marca: ${marca} - Modelo: ${newModelo} - Serie: ${serie} - Color: ${color}`)
+        
+
+                var query = await updateCar(placa, marca, newModelo, serie, color);
+                alert("Modificado")
+            }
+
+        } catch (e) {
+            alert(e);
+        }
     }
 
 
