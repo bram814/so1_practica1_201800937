@@ -7,7 +7,7 @@
 ## Docker
 ______
 
-##### [How To Install Docker on Ubuntu 22.04 LTS](Tecnico.md)
+##### How To Install Docker on Ubuntu 22.04 LTS
 _____
 
 ```bash
@@ -35,8 +35,11 @@ sudo docker --version
 
 ____
 
-##### [Install MongoDB - Docker Hub](https://hub.docker.com/_/mongo) 
+
+##### Install MongoDB - Docker Hub
+
 _______
+
 
 
 Install Mongo
@@ -63,6 +66,77 @@ Stop Mongo
 
 ```bash
 sudo docker stop 3ea0
+```
+
+
+##### Commandos de Docker
+
+Ejecutar una imagen
+
+```bash
+sudo docker run -d -p <<puerto a exponer>>:<<puerto del contenedor>> <<nombre imagen>>
+```
+
+Ejecutar una imagen visualizando mensajes en consola
+
+```bash
+sudo docker run -it -p <<puerto a exponer>>:<<puerto del contenedor>> <<nombre imagen>>
+```
+
+Ver las imagenes descargadas
+
+```bash
+sudo docker images
+```
+
+Ver todos los contenedores
+
+```bash
+sudo docker ps -a
+```
+
+Ver todos los contenedores activos
+
+```bash
+sudo docker ps
+```
+
+##### Crear imagen
+
+```bash
+sudo docker build -t <<nombre imagen>> .
+```
+
+Subir una imagen a DockerHub
+
+```bash
+sudo docker build -t <<nombre de usuario>>/<<nombre de la imagen>> .
+
+sudo docker push <<nombre de usuario>>/<<nombre de la imagen>>
+```
+
+Bajar una imagen a DockerHub
+
+```bash
+sudo docker pull <<nombre de usuario>>/<<nombre de la imagen>>
+```
+
+Eliminar todas las imagenes, contenedores y volumenes.
+
+```bash
+sudo docker system prune -a
+```
+
+Eliminar un contenedir especifico.
+
+```bash
+sudo docker rm <<ID container>>
+```
+
+Eliminar una imagen especifica.
+
+```bash
+sudo docker rmi <<ID image>>
 ```
 
 _______
