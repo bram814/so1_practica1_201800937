@@ -43,7 +43,7 @@ func main() {
 	app.Get("/carro", config.GetCarr) // ver Carros
 	app.Post("/carro", config.PostCarr) // Ingresar Carro
 
-	app.Post("/updateCar/:placa", config.PostUpdateCar)
+	app.Put("/updateCar/:placa", config.PostUpdateCar)
 
 	// app.Delete("/carro")
 
