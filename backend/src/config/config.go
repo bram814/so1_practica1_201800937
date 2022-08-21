@@ -8,7 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/bson/primitive"
 
 	/* Import */
 	"time"
@@ -108,4 +107,101 @@ func GetCarr(c *fiber.Ctx) error {
 
 	return c.JSON(carr)
 
+}
+
+
+func PostUpdateCar(c *fiber.Ctx) error {
+
+	idParam := c.Params("placa")
+
+	carro := new(Carr)
+
+	if err := c.BodyParser(carro); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+
+
+
+	query := bson.D{{Key: "placa", Value: idParam}}
+
+	if(carro.Marca != "" && carro.Modelo != -1 && carro.Serie != "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie != "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+	} else {
+		return c.SendStatus(500)
+	}
+	
+	
+	return c.Status(200).JSON(carro)
 }

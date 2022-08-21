@@ -43,7 +43,8 @@ func main() {
 	app.Get("/carro", config.GetCarr) // ver Carros
 	app.Post("/carro", config.PostCarr) // Ingresar Carro
 
-	// app.Put("/carro")
+	app.Post("/updateCar/:placa", config.PostUpdateCar)
+
 	// app.Delete("/carro")
 
 	_ = app.Listen(fmt.Sprintf(":%d",config.ENV_PORT))
