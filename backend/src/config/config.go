@@ -8,21 +8,21 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/bson/primitive"
 
 	/* Import */
+	"strconv"
 	"time"
 	"context"
 
 )
 
 
-type MongoInstance struct {
+type MongoDbInstance struct {
 	Client *mongo.Client
 	Db     *mongo.Database
 }
 
-var mg MongoInstance
+var ENV_INSTACE_MONGO MongoDbInstance
 
 const dbName = "jash"
 const mongoURI = "mongodb://localhost:27017/" + dbName
@@ -54,7 +54,7 @@ func Connect() error {
 		return err
 	}
 
-	mg = MongoInstance{
+	ENV_INSTACE_MONGO = MongoDbInstance{
 		Client: client,
 		Db:     db,
 	}
@@ -63,7 +63,7 @@ func Connect() error {
 
 
 func PostCarr(c *fiber.Ctx) error {
-	collection := mg.Db.Collection("carro")
+	collection := ENV_INSTACE_MONGO.Db.Collection("carro")
 
 	carr := new(Carr)
 
@@ -95,7 +95,7 @@ func GetCarr(c *fiber.Ctx) error {
 
 	query := bson.D{{}}
 
-	cursor, err := mg.Db.Collection("carro").Find(c.Context(), query)
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), query)
 	if err != nil {
 		return c.Status(500).SendString(err.Error())
 	}
@@ -108,4 +108,294 @@ func GetCarr(c *fiber.Ctx) error {
 
 	return c.JSON(carr)
 
+}
+
+
+func PostUpdateCar(c *fiber.Ctx) error {
+
+	idParam := c.Params("placa")
+
+	carro := new(Carr)
+
+	if err := c.BodyParser(carro); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+
+
+
+	query := bson.D{{Key: "placa", Value: idParam}}
+
+	if(carro.Marca != "" && carro.Modelo != -1 && carro.Serie != "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color == "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie != "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie == "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie == "" && carro.Color == "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color == "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "serie",  Value: carro.Serie},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+	}
+	
+	
+	return c.Status(200).JSON(carro)
+}
+
+
+func DeleteCar(c *fiber.Ctx) error {
+
+	idParam := c.Params("placa")
+
+	carro := new(Carr)
+
+	if err := c.BodyParser(carro); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+
+
+	query := bson.D{{Key: "placa", Value: idParam}}
+	result, err := ENV_INSTACE_MONGO.Db.Collection("carro").DeleteOne(c.Context(), &query)
+
+	if err != nil {
+		return c.SendStatus(500)
+	}
+
+	if result.DeletedCount < 1 {
+		return c.SendStatus(404)
+	}
+
+	return c.Status(200).JSON("Eliminador")
+}
+
+func GetMarca(c *fiber.Ctx) error {
+
+	idParam := c.Params("marca")
+	query := bson.D{{Key: "marca", Value: idParam}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
+}
+
+func GetModelo(c *fiber.Ctx) error {
+
+	idParam := c.Params("modelo")
+	intI, _ := strconv.Atoi(idParam)
+	query := bson.D{{Key: "modelo", Value: intI}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
+}
+
+func GetColor(c *fiber.Ctx) error {
+
+	idParam := c.Params("color")
+	query := bson.D{{Key: "color", Value: idParam}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
 }

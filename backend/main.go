@@ -43,8 +43,13 @@ func main() {
 	app.Get("/carro", config.GetCarr) // ver Carros
 	app.Post("/carro", config.PostCarr) // Ingresar Carro
 
-	// app.Put("/carro")
-	// app.Delete("/carro")
+	app.Put("/updateCar/:placa", config.PostUpdateCar)
+	app.Delete("/deleteCar/:placa", config.DeleteCar)
+
+
+	app.Get("/filterMarca/:marca", 	 config.GetMarca)
+	app.Get("/filterModelo/:modelo", config.GetModelo)
+	app.Get("/filterColor/:color", 	 config.GetColor)
 
 	_ = app.Listen(fmt.Sprintf(":%d",config.ENV_PORT))
 }
