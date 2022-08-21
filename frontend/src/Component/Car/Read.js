@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Car/Read.css';
 import Car from './Car';
+import { getCar } from '../../Api/Route.js';
 
 export default function Read(props){
 	
@@ -13,6 +14,15 @@ export default function Read(props){
 
     async function handleChargeUser(event){
     	// setCar([[0],[1]])
+
+    	var query = await getCar();  
+    	var result = await query.json();
+    	console.log(result)
+    	setCar(result);
+
+    	
+
+
     }
 
 
@@ -40,12 +50,12 @@ export default function Read(props){
                         car.map(i => {
                             return(
                                 <Car 
-                                    key 		= {i[0]}
-                                    dataPlaca 	= {i[0]} 
-                                    dataMarca 	= {i[1]}
-                                    dataModelo 	= {i[2]}
-                                    dataSerie 	= {i[3]}
-                                    dataColor 	= {i[4]}
+                                    key 		= {i.id}
+                                    dataPlaca 	= {i.placa} 
+                                    dataMarca 	= {i.marca}
+                                    dataModelo 	= {i.modelo}
+                                    dataSerie 	= {i.serie}
+                                    dataColor 	= {i.color}
                                 />
                             )
                         })
