@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import '../css/Registry.css';
+import '../css/Car/Update.css';
 
-export default function Registry(props){
+export default function Update(props){
 
 	const [placa, setPlaca] = useState('');
     const [marca, setMarca] = useState('');
@@ -36,8 +36,8 @@ export default function Registry(props){
 
 	return(
 		 <>
-            <form className="form-login-2" onSubmit={handleCreateCarr}>
-                <h1>Crear Usuario</h1>
+            <form className="form-car-update" onSubmit={handleCreateCarr}>
+                <h1>Actualizar Vehiculo</h1>
                 <input className="etiqueta" type="text" placeholder="Placa"  value={placa}  onChange={handleInputChange1} />
                 <input className="etiqueta" type="text" placeholder="Marca"  value={marca}  onChange={handleInputChange2} />
                 <input className="etiqueta" type="text" placeholder="Modelo" value={modelo} onChange={handleInputChange3} />

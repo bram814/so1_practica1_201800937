@@ -21,7 +21,7 @@
     margin-bottom: 16px;
     font-family: 'Times New Roman';
 }
-.form-login-2{
+.form-car-update{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -34,9 +34,9 @@
     border-radius: 4px;
     font-family: 'Times New Roman';
     color: white;
-    box-shadow: 7px 13px 37px rgb(25, 255, 22);
+    box-shadow: 7px 13px 37px rgb(47, 253, 250);
 }
-.form-login-2 h1  {
+.form-car-update h1  {
 
     font-size: 22px;
     margin: 20px;
@@ -57,7 +57,7 @@
     /* //text-align: center; */
 }
 
-.form-login-2 .boton{
+.form-car-update .boton{
 
     width: 100%;
     background: #000000;
@@ -69,8 +69,6 @@
     font-size: 18px;
 
 }
-
-
 
 
 .form-login-3{

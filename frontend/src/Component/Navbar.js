@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ENV_HOME, ENV_REGISTRY } from '../Config/env'
+import { ENV_HOME, ENV_REGISTRY, ENV_READ, ENV_UPDATE } from '../Config/env'
 
 function Navbar(props){
 
@@ -23,15 +23,28 @@ function Navbar(props){
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav mx-auto">
-
                             <li className="nav-item">
-                            <Link className="nav-link active" to={ENV_REGISTRY}>Registrar</Link>
+                                <Link className="nav-link active" to={ENV_REGISTRY}>Create</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" to={ENV_READ}>Read</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" to={ENV_UPDATE}>Update</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active" to={ENV_REGISTRY}>Delete</Link>
                             </li>
                         </ul>
 
                     </div>
                 </div>
             </nav>
+            <center>
+            <h>________________________________________________________________________________________________________________________________________________________________________________________</h>
+            </center>
+            <br />
+                    
         </> 
     );
 
