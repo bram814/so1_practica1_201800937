@@ -10,6 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 
 	/* Import */
+	"strconv"
 	"time"
 	"context"
 
@@ -339,4 +340,62 @@ func DeleteCar(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON("Eliminador")
+}
+
+func GetMarca(c *fiber.Ctx) error {
+
+	idParam := c.Params("marca")
+	query := bson.D{{Key: "marca", Value: idParam}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
+}
+
+func GetModelo(c *fiber.Ctx) error {
+
+	idParam := c.Params("modelo")
+	intI, _ := strconv.Atoi(idParam)
+	query := bson.D{{Key: "modelo", Value: intI}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
+}
+
+func GetColor(c *fiber.Ctx) error {
+
+	idParam := c.Params("color")
+	query := bson.D{{Key: "color", Value: idParam}}
+
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), &query)
+	if err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	var carr []Carr = make([]Carr, 0)
+
+	if err := cursor.All(c.Context(), &carr); err != nil {
+		return c.Status(500).SendString(err.Error())
+	}
+
+	return c.JSON(carr)
 }
