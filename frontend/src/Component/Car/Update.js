@@ -45,7 +45,7 @@ export default function Update(props){
                 <input className="etiqueta" type="text" placeholder="Color"  value={color}  onChange={handleInputChange5} />
                 
                 
-                <button className="boton" type="submit">Registrar</button>
+                <button className="boton" type="submit">Actualizar</button>
             </form>    
         
         </>  

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ENV_HOME, ENV_REGISTRY, ENV_READ, ENV_UPDATE } from '../Config/env'
+import { ENV_HOME, ENV_REGISTRY, ENV_READ, ENV_UPDATE, ENV_DELETE } from '../Config/env'
 
 function Navbar(props){
 
@@ -33,7 +33,7 @@ function Navbar(props){
                                 <Link className="nav-link active" to={ENV_UPDATE}>Update</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" to={ENV_REGISTRY}>Delete</Link>
+                                <Link className="nav-link active" to={ENV_DELETE}>Delete</Link>
                             </li>
                         </ul>
 
