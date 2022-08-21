@@ -44,8 +44,7 @@ func main() {
 	app.Post("/carro", config.PostCarr) // Ingresar Carro
 
 	app.Put("/updateCar/:placa", config.PostUpdateCar)
-
-	// app.Delete("/carro")
+	app.Delete("/deleteCar/:placa", config.DeleteCar)
 
 	_ = app.Listen(fmt.Sprintf(":%d",config.ENV_PORT))
 }
