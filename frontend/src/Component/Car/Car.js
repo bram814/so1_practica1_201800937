@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { updateCar } from '../../Api/Route';
 
 export default function Car(props){
 
-	const [placa, setPlaca] = useState('');
-    const [marca, setMarca] = useState('');
-    const [modelo, setModelo] = useState('');
-    const [serie, setSerie] = useState('');
-    const [color, setColor] = useState('');
+	const [placa, setPlaca] = useState(props.dataPlaca);
+    const [marca, setMarca] = useState(props.dataMarca);
+    const [modelo, setModelo] = useState(props.dataModelo);
+    const [serie, setSerie] = useState(props.dataSerie);
+    const [color, setColor] = useState(props.dataColor);
 
 	function handleInputChange1(e){
         setPlaca(e.target.value);
@@ -28,11 +30,35 @@ export default function Car(props){
     
     async function handleEdit(e){
         e.preventDefault();
+
+        try{    
+
+            if(placa === ""){
+                alert("Debe de ingresar una placa")
+            } else{
+                var newModelo;
+                if(modelo === ''){
+                    newModelo = -1;
+                }else {
+                    newModelo = parseInt(modelo);
+                }
+                console.log(`Placa: ${placa} -  Marca: ${marca} - Modelo: ${newModelo} - Serie: ${serie} - Color: ${color}`)
+        
+
+                var query = await updateCar(placa, marca, newModelo, serie, color);
+                alert("Modificado")
+            }
+
+        } catch (e) {
+            alert(e);
+        }
     }
 
 
     async function handleDelete(e){
         e.preventDefault();
+         
+        
     }
 
 	return(
@@ -44,7 +70,6 @@ export default function Car(props){
                         <table className="form-table" border="2"  cellSpacing="1" align="center">
                         	<thead>
                                 <tr>
-                                    <th align="center">ID</th>
                                     <th align="center">Placa</th>
                                     <th align="center">Marca</th>
                                     <th align="center">Modelo</th>
@@ -56,9 +81,6 @@ export default function Car(props){
                             </thead>
                             <tbody> 
                                 <tr>
-                                	<td>
-                                        <input className="etiqueta-user" type="text" value={placa} 	placeholder={props.dataPlaca} 	onChange={handleInputChange1}/>
-                                    </td>
                                     <td>
                                         <input className="etiqueta-user" type="text" value={placa} 	placeholder={props.dataPlaca} 	onChange={handleInputChange1}/>
                                     </td>
