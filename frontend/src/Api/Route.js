@@ -5,6 +5,7 @@ const url_api = "http://127.0.0.1:4000";
 const url_getCar    = url_api + "/carro";
 const url_postCar   = url_api + "/carro";
 const url_updateCar = url_api + "/updateCar/";
+const url_deleteCar = url_api + "/deleteCar/";
 
 
 export async function getCar(){
@@ -50,6 +51,21 @@ export async function updateCar(_placa, _marca, _modelo, _serie, _color){ // ver
             modelo: _modelo,
             serie: _serie,
             color: _color
+        }),
+    });
+}
+
+
+export async function deleteCar(_placa){ // verificar usuario
+
+    return fetch(url_deleteCar + _placa, {
+        method: 'DELETE',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            placa: _placa
         }),
     });
 }

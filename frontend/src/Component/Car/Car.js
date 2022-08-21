@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import { updateCar } from '../../Api/Route';
+import { updateCar, deleteCar } from '../../Api/Route';
 
 export default function Car(props){
 
@@ -57,7 +57,19 @@ export default function Car(props){
 
     async function handleDelete(e){
         e.preventDefault();
-         
+        try{    
+            if(placa !== ""){
+            
+                var query = await deleteCar(placa);
+                alert("Eliminado")
+
+            } else {
+                alert("Ingrese Placa")
+            }
+
+        } catch (e) {
+            alert(e);
+        }
         
     }
 
