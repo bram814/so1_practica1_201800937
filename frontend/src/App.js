@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React from 'react';
+import { Route, Routes} from 'react-router-dom';
+/* import env */
+import { ENV_HOME, ENV_REGISTRY } from './Config/env';
+/* import page */
+import Home from './Pages/Home';
+/* import Component */
+import Navbar from './Component/Navbar';
+import Footer from './Component/Footer';
+import Registry from './Component/Carr/Registry';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+
+      <Navbar />
+      <main>
+         <div className="container">
+          <Routes>
+            <Route path={ENV_HOME}        element={<Home />} />
+            <Route path={ENV_REGISTRY}    element={<Registry />} />
+          </Routes>
+        </div>
+      </main>
+     
+      <Footer />
     </div>
   );
 }
