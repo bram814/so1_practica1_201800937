@@ -52,7 +52,7 @@ function Navbar(props){
                                 > Create </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" className={`nav-link ${ isActivate2 ? "active nav-activate" : "active"}`} 
+                                <Link className={`nav-link ${ isActivate2 ? "active nav-activate" : "active"}`} 
                                     to={ENV_READ}
                                     onClick={ () => {
                                         setIsActivate0(false);
@@ -64,7 +64,7 @@ function Navbar(props){
                                 >Read</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" className={`nav-link ${ isActivate3 ? "active nav-activate" : "active"}`} 
+                                <Link className={`nav-link ${ isActivate3 ? "active nav-activate" : "active"}`} 
                                     to={ENV_UPDATE}
                                     onClick={ () => {
                                         setIsActivate0(false);
@@ -76,7 +76,7 @@ function Navbar(props){
                                 >Update</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" className={`nav-link ${ isActivate4 ? "active nav-activate" : "active"}`} 
+                                <Link className={`nav-link ${ isActivate4 ? "active nav-activate" : "active"}`} 
                                     to={ENV_DELETE}
                                     onClick={ () => {
                                         setIsActivate0(false);
