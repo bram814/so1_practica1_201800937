@@ -5,7 +5,7 @@ import './css/Navbar.css';
 
 function Navbar(props){
 
-    const [isActivate0, setIsActivate0] = useState(false);
+    const [isActivate0, setIsActivate0] = useState(true);
     const [isActivate1, setIsActivate1] = useState(false);
     const [isActivate2, setIsActivate2] = useState(false);
     const [isActivate3, setIsActivate3] = useState(false);
@@ -93,7 +93,7 @@ function Navbar(props){
                 </div>
             </nav>
             <center>
-            <h>________________________________________________________________________________________________________________________________________________________________________________________</h>
+            <h1>________________________________________________________________________________________________________________________________________________________________________________________</h1>
             </center>
             <br />
                     
