@@ -16,12 +16,12 @@ import (
 )
 
 
-type MongoInstance struct {
+type MongoDbInstance struct {
 	Client *mongo.Client
 	Db     *mongo.Database
 }
 
-var mg MongoInstance
+var ENV_INSTACE_MONGO MongoDbInstance
 
 const dbName = "jash"
 const mongoURI = "mongodb://localhost:27017/" + dbName
@@ -53,7 +53,7 @@ func Connect() error {
 		return err
 	}
 
-	mg = MongoInstance{
+	ENV_INSTACE_MONGO = MongoDbInstance{
 		Client: client,
 		Db:     db,
 	}
@@ -62,7 +62,7 @@ func Connect() error {
 
 
 func PostCarr(c *fiber.Ctx) error {
-	collection := mg.Db.Collection("carro")
+	collection := ENV_INSTACE_MONGO.Db.Collection("carro")
 
 	carr := new(Carr)
 
@@ -94,7 +94,7 @@ func GetCarr(c *fiber.Ctx) error {
 
 	query := bson.D{{}}
 
-	cursor, err := mg.Db.Collection("carro").Find(c.Context(), query)
+	cursor, err := ENV_INSTACE_MONGO.Db.Collection("carro").Find(c.Context(), query)
 	if err != nil {
 		return c.Status(500).SendString(err.Error())
 	}
@@ -136,7 +136,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -157,7 +157,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -177,7 +177,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -196,7 +196,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -216,7 +216,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -234,7 +234,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -251,7 +251,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -269,7 +269,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -285,7 +285,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -301,7 +301,7 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				},
 			},
 		}
-		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+		err := ENV_INSTACE_MONGO.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
 
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
@@ -313,4 +313,30 @@ func PostUpdateCar(c *fiber.Ctx) error {
 	
 	
 	return c.Status(200).JSON(carro)
+}
+
+
+func DeleteCar(c *fiber.Ctx) error {
+
+	idParam := c.Params("placa")
+
+	carro := new(Carr)
+
+	if err := c.BodyParser(carro); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+
+
+	query := bson.D{{Key: "placa", Value: idParam}}
+	result, err := ENV_INSTACE_MONGO.Db.Collection("carro").DeleteOne(c.Context(), &query)
+
+	if err != nil {
+		return c.SendStatus(500)
+	}
+
+	if result.DeletedCount < 1 {
+		return c.SendStatus(404)
+	}
+
+	return c.Status(200).JSON("Eliminador")
 }
