@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/gofiber/cors v0.2.2 // indirect
 	github.com/gofiber/fiber v1.14.6 // indirect
 	github.com/gofiber/fiber/v2 v2.36.0 // indirect
 	github.com/gofiber/template v1.6.30 // indirect
