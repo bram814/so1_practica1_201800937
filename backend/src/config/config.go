@@ -146,6 +146,66 @@ func PostUpdateCar(c *fiber.Ctx) error {
 		}
 
 
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "serie",  Value: carro.Serie},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color != "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
+	} else if(carro.Marca != "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color == "") {
+
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "marca",  Value: carro.Marca},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+
 	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie != "" && carro.Color != "") {
 		update := bson.D{
 		{Key: "$set",
@@ -153,6 +213,41 @@ func PostUpdateCar(c *fiber.Ctx) error {
 				{Key: "modelo", Value: carro.Modelo},
 				{Key: "serie",  Value: carro.Serie},
 				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie == "" && carro.Color != "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
+				{Key: "color",  Value: carro.Color},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
+
+	} else if(carro.Marca == "" && carro.Modelo != -1 && carro.Serie == "" && carro.Color == "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "modelo", Value: carro.Modelo},
 				},
 			},
 		}
@@ -182,6 +277,22 @@ func PostUpdateCar(c *fiber.Ctx) error {
 			}
 			return c.SendStatus(500)
 		}
+	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie != "" && carro.Color == "") {
+		update := bson.D{
+		{Key: "$set",
+			Value: bson.D{
+				{Key: "serie",  Value: carro.Serie},
+				},
+			},
+		}
+		err := mg.Db.Collection("carro").FindOneAndUpdate(c.Context(), query, update).Err()
+
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.SendStatus(403)
+			}
+			return c.SendStatus(500)
+		}
 	} else if(carro.Marca == "" && carro.Modelo == -1 && carro.Serie == "" && carro.Color != "") {
 		update := bson.D{
 		{Key: "$set",
@@ -198,8 +309,6 @@ func PostUpdateCar(c *fiber.Ctx) error {
 			}
 			return c.SendStatus(500)
 		}
-	} else {
-		return c.SendStatus(500)
 	}
 	
 	
