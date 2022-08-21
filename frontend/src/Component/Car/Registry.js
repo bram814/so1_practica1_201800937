@@ -37,7 +37,7 @@ export default function Registry(props){
 	return(
 		 <>
             <form className="form-login-2" onSubmit={handleCreateCarr}>
-                <h1>Crear Usuario</h1>
+                <h1>Registrar Vehiculo</h1>
                 <input className="etiqueta" type="text" placeholder="Placa"  value={placa}  onChange={handleInputChange1} />
                 <input className="etiqueta" type="text" placeholder="Marca"  value={marca}  onChange={handleInputChange2} />
                 <input className="etiqueta" type="text" placeholder="Modelo" value={modelo} onChange={handleInputChange3} />

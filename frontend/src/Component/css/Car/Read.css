@@ -1,0 +1,90 @@
+.form-user {
+    color: white;
+    margin: 1px;
+    padding: 1px;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-family: 'Times New Roman';
+}
+
+.form-user h1  {
+
+    font-size: 22px;
+    margin: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+
+}
+
+.form-user table, input {
+    text-align: center;
+}
+
+.form-user .button-edit{
+
+    width: 100%;
+    background: rgb(0,0,0);
+    border: 1px solid rgb(84, 255, 43);
+    padding: 12px;
+    color: white;
+    margin-left: 1px 0;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    margin-bottom: 10px;
+    box-shadow: 7px 13px 37px rgb(84, 255, 43);
+
+}
+
+.form-user .button-delete{
+
+    width: 100%;
+    background: rgb(0,0,0);
+    border: 1px solid rgb(255, 40, 40);
+    padding: 12px;
+    color: white;
+    margin-left: 1px 0;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    box-shadow: 7px 13px 37px rgb(255, 40, 40);
+
+}
+
+.etiqueta-user {
+    width: 100%;
+    color: white;
+    background: #000000;
+    padding: 0px;
+    height: auto;
+    margin-bottom: 25px;
+    border: 0px solid #000000;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    /* //text-align: center; */
+}
+.form-user .button-charge{
+
+    width: 30%;
+    background: rgb(0,0,0);
+    border: 1px solid rgb(60, 255, 202);
+    padding: 12px;
+    color: white;
+    margin-left: 1px 0;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    box-shadow: 7px 13px 37px rgb(60, 255, 202);
+
+}
+
+.form-select-user{
+    
+    margin: 0px;
+    padding: 10px;
+    width: 30%;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    background: black;
+    color: white;
+    font-family: 'Times New Roman';
+    box-shadow: 7px 13px 37px rgb(60, 255, 202);
+}
