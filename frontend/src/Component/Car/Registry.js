@@ -35,7 +35,7 @@ export default function Registry(props){
         try{    
 
             var query = await addCar(placa, marca, parseInt(modelo), serie, color);  
-
+            alert("Vehiculo Registrado")
         } catch (e) {
             alert(e);
         }
