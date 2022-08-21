@@ -62,6 +62,22 @@
     font-size: 18px;
     /* //text-align: center; */
 }
+
+.etiqueta-user-2 {
+    width: 100%;
+    color: white;
+    background: #000000;
+    padding: 0px;
+    height: auto;
+    margin-bottom: 25px;
+    border: 0px solid #000000;
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    /* //text-align: center; */
+    box-shadow: 7px 13px 37px rgb(60, 255, 202);
+
+}
+
 .form-user .button-charge{
 
     width: 30%;
@@ -80,7 +96,7 @@
     
     margin: 0px;
     padding: 10px;
-    width: 30%;
+    width: 50%;
     border-radius: 4px;
     margin-bottom: 16px;
     background: black;
