@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  database:
+    image: mongo
+    container_name: container_mogo
+    restart: always
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  backend:
+    image: bram814/backend_p1_20180093
+    container_name: container_backend
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+    links:
+      - database
+
+  frontend:
+    image: bram814/frontend_p1_201800937
+    container_name: container_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
+    external: true
